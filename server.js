@@ -93,9 +93,11 @@ app.delete("/api/user/favourites/:id", passport.authenticate('jwt', {session : f
 
 userService.connect()
 .then(() => {
-    app.listen(HTTP_PORT, () => { console.log("API listening on: " + HTTP_PORT) });
+    console.log("MongoDB connected successfully");
 })
 .catch((err) => {
-    console.log("unable to start the server: " + err);
+    console.log("unable to connect to the database: " + err);
     process.exit();
 });
+
+module.exports = app;
