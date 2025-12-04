@@ -38,6 +38,16 @@ app.use(passport.initialize());
 app.use(express.json());
 app.use(cors());
 
+app.use(async (req, res, next) => {
+  try {
+    await userService.connect();
+    next();
+  } catch (err) {
+    res.status(500).json({ message: "Database connection failed", error: err });
+  }
+});
+
+
 app.post("/api/user/register", (req, res) => {
     userService.registerUser(req.body)
     .then((msg) => {
@@ -90,13 +100,5 @@ app.delete("/api/user/favourites/:id", passport.authenticate('jwt', {session : f
     })
 });
 
-app.use(async (req, res, next) => {
-  try {
-    await userService.connect();
-    next();
-  } catch (err) {
-    res.status(500).json({ message: "Database connection failed", error: err });
-  }
-});
 
 module.exports = serverless(app);
