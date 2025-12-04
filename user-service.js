@@ -41,7 +41,6 @@ module.exports.registerUser = function (userData) {
             bcrypt.hash(userData.password, 10).then(hash => {
 
                 userData.password = hash;
-                delete userData.password2;
 
                 let newUser = new User(userData);
 
