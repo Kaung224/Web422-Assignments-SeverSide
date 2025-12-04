@@ -39,7 +39,6 @@ module.exports.registerUser = function (userData) {
       .hash(userData.password, 10)
       .then((hash) => {
         userData.password = hash;
-        delete userData.password2; // ✅ remove confirm password
 
         let newUser = new User(userData);
 
