@@ -34,8 +34,6 @@ passport.use(strategy);
 
 app.use(passport.initialize());
 
-const HTTP_PORT = process.env.PORT || 8080;
-
 app.use(express.json());
 app.use(cors());
 
@@ -52,7 +50,7 @@ app.post("/api/user/login", (req, res) => {
     userService.checkUser(req.body)
     .then((user) => {
         let payload = {
-            _id : user.id,
+            _id : user._id,
             userName : user.userName
         }
 
