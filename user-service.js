@@ -15,7 +15,7 @@ let userSchema = new Schema({
   favourites: [String],
 });
 
-let User;
+let User = mongoose.model("users", userSchema);
 
 module.exports.connect = function () {
   return new Promise((resolve, reject) => {
