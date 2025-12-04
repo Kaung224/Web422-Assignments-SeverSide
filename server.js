@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
+const serverless = require("serverless-http");
 const userService = require("./user-service.js");
 
 const jwt = require('jsonwebtoken');
@@ -89,13 +90,8 @@ app.delete("/api/user/favourites/:id", passport.authenticate('jwt', {session : f
     })
 });
 
-userService.connect()
-.then(() => {
-    console.log("MongoDB connected successfully");
-})
-.catch((err) => {
-    console.log("unable to connect to the database: " + err);
-    process.exit();
-});
+(async () => {
+  await userService.connect();
+})();
 
-module.exports = app;
+module.exports = serverless(app);
