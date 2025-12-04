@@ -4,7 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
 const serverless = require("serverless-http");
-const userService = require("../user-service.js");
+const userService = require("./user-api/user-service.js");
 
 const jwt = require('jsonwebtoken');
 const passport = require("passport");
